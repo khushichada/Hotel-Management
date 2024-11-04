@@ -111,7 +111,12 @@ public class Hotel
         // You can use libraries like java.time.LocalDate or Joda-Time for a more accurate and convenient date calculation
         // This is just a basic example
         long difference = checkOutDate.getTime() - checkInDate.getTime();
-        return (int) (difference / (24 * 60 * 60 * 1000)); // Convert milliseconds to days
+         int daysStayed = (int) (difference / (24 * 60 * 60 * 1000)); // Convert milliseconds to days
+
+         // If check-out is on the same day, count it as one day
+       return daysStayed == 0 ? 1 : daysStayed;
+       
+         
     }
 
 private double getRoomPrice(String roomType) {
