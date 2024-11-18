@@ -12,8 +12,8 @@ public class HotelManagementApplication
         Hotel h=new Hotel();
         Food f=new Food();
         Billing bl=new Billing();
-        System.out.println("GRAND WELCOME! TO THE HOTEL OMG");
-        System.out.println("please select you necceseties");
+        System.out.println("GRAND WELCOME TO THE HOTEL OMG!");
+        System.out.println("please select you  necessities");
         Scanner scanner=new Scanner(System.in);
         while (true)
         {
@@ -30,8 +30,8 @@ public class HotelManagementApplication
                     String cname = scanner.next();
                     System.out.println("we have 2 types of rooms ");
                     System.out.println("1.ordinary(single bed)");
-                    System.out.println("2.luxurious(doble bed with balcony");
-                    System.out.println("enter the type of room you want(ordinary/luxurious");
+                    System.out.println("2.luxurious(double bed with balcony");
+                    System.out.println("enter the type of room you want(ordinary/luxurious)");
                     String roomtype=scanner.next();
                     System.out.println("Enter address: ");
                     String address = scanner.next();
@@ -39,11 +39,11 @@ public class HotelManagementApplication
                     String phoneNumber = scanner.next();
                     System.out.print("Enter check-in date (yyyy-MM-dd): ");
                     String checkInDateString = scanner.next();
-                    java.sql.Date checkInDate = java.sql.Date.valueOf(checkInDateString);
+                    Date checkInDate = Date.valueOf(checkInDateString);
                     int roomno=h.checkInGuest(cname, address, phoneNumber,roomtype,checkInDate );
                     if(roomno==-1)
                     {
-                        System.out.println("sorry! the type of room you want is not available");
+                        System.out.println("sorry! the type of room you want is not available.");
                     }
                     else
                     {
@@ -56,7 +56,7 @@ public class HotelManagementApplication
                    int cid = scanner.nextInt();
                    System.out.print("Enter your room number :");
                    int rn=scanner.nextInt();
-                   java.sql.Date checkOutDate = new java.sql.Date(System.currentTimeMillis()); // Current date as check-out date
+                   Date checkOutDate = new Date(System.currentTimeMillis()); // Current date as check-out date
                    h.checkOutGuest(cid,rn,checkOutDate);
                    break;
                 case 3:                    
@@ -68,6 +68,7 @@ public class HotelManagementApplication
                     String name=scanner.next();
                     System.out.print("Enter yor phone number:");
                     String pno=scanner.next();
+                    
                     System.out.println("Please Order food from provided menu");
                     
                     f.printMenu();
@@ -96,7 +97,7 @@ public class HotelManagementApplication
                     System.out.println("Thank you");
                     break;
                 case 5:
-                    System.out.println("kindly enter these datails for billing");
+                    System.out.println("kindly enter these details for billing");
                     System.out.println("enter cid:");
                     int c = scanner.nextInt();
                     System.out.print("Enter your name:");
@@ -109,7 +110,7 @@ public class HotelManagementApplication
                     else
                     {
                         System.out.println("Your total bill is:"+b);
-                        System.out.println("please pay by using this upi");
+                        System.out.println("please pay by cash or by using upi");
                         System.out.println("Thank you for Visiting.Please visit again..");
                     }
             }
