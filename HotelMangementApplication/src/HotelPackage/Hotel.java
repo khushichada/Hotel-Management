@@ -43,6 +43,7 @@ public class Hotel
                 if(roomNumber!=-1)
                 {
                 String insertQuery = "INSERT INTO customer_information(customer_name,address,phone_number,room_type,room_number,check_in_date) VALUES (?, ?, ?, ?, ?, ?)";
+                
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
                 insertStatement.setString(1, name);
                 insertStatement.setString(2, address);
@@ -50,7 +51,18 @@ public class Hotel
                 insertStatement.setString(4, roomtype);
                 insertStatement.setInt(5, roomNumber);
                 insertStatement.setDate(6, new java.sql.Date(checkInDate.getTime()));
-                insertStatement.executeUpdate();  
+                insertStatement.executeUpdate();
+                String selectQuery = "SELECT cid FROM customer_information WHERE customer_name = ? AND address = ? AND phone_number = ?";
+                PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+                selectStatement.setString(1, name);
+                selectStatement.setString(2, address);
+                selectStatement.setString(3, phoneNumber);
+                ResultSet selectResultSet = selectStatement.executeQuery();
+                int custid=0;
+                if (selectResultSet.next()) {
+                    custid = selectResultSet.getInt("cid");
+                }
+                System.out.println("Please take your Card it has your ID.keep it safe.Your ID is "+custid);
                 return roomNumber;
                 }
           
@@ -98,7 +110,7 @@ public class Hotel
             insertStatement.setInt(5, daysStayed);
             insertStatement.setDouble(6, totalRoomPrice);
             insertStatement.executeUpdate();
-            System.out.println("Check-out successful. Thank you for staying with us!");
+            System.out.println("Check-out successful. Thank you for Choosing us!");
         } else {
             System.out.println("No guest found with the specified CID.");
         }
@@ -108,15 +120,13 @@ public class Hotel
 } 
  private int calculateDays(Date checkInDate, Date checkOutDate) {
         // Implementation to calculate the number of days between two dates
-        // You can use libraries like java.time.LocalDate or Joda-Time for a more accurate and convenient date calculation
-        // This is just a basic example
+        
+       
         long difference = checkOutDate.getTime() - checkInDate.getTime();
          int daysStayed = (int) (difference / (24 * 60 * 60 * 1000)); // Convert milliseconds to days
 
          // If check-out is on the same day, count it as one day
        return daysStayed == 0 ? 1 : daysStayed;
-       
-         
     }
 
 private double getRoomPrice(String roomType) {
