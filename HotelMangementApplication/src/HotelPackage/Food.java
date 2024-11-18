@@ -88,13 +88,14 @@ public void placeFoodOrder(String customerName, String phoneNumber, String[] foo
             updateStatement.setString(2, customerName);
             updateStatement.executeUpdate();
         } else {
-            // If the customer does not exist, insert a new record with the customer_name and food_price in the customer_information table
+            //If the customer does not exist, insert a new record with the customer_name and food_price in the customer_information table
             String insertQuery = "INSERT INTO customer_information (customer_name, phone_number, food_price) VALUES (?, ?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
             insertStatement.setString(1, customerName);
             insertStatement.setString(2, phoneNumber);
             insertStatement.setDouble(3, totalFoodPrice);
             insertStatement.executeUpdate();
+            
         }
 
         System.out.println("Food order placed successfully.");
