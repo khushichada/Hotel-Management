@@ -1,15 +1,3 @@
-# Ant
-- task: aqciconnect@2
-  inputs:
-    appURL: 'https://training.accelq.io/'
-    userName: 'khushi.chada@accelq.com'
-    apiKey: 'FF6hmcDNg52HdacjpBYi6b9ZweJXnGTmOSgzsnjIJi4'
-    tenantCode: 'accelqtraining'
-    jobId: '96550'
-# Build your Java projects and run tests with Apache Ant.
-# Add steps that save build artifacts and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
@@ -17,6 +5,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: aqciconnect@2
+  inputs:
+    appURL: 'https://training.accelq.io/'
+    userName: 'khushi.chada@accelq.com'
+    apiKey: 'FF6hmcDNg52HadcjpBYi6b9ZweJXnGTMoSgzsnjIJi4'
+    tenantCode: 'accelqtraining'
+    ciJobId: '96550'
+
+# Optional: Ant build step
 - task: Ant@1
   inputs:
     workingDirectory: ''
@@ -25,4 +22,6 @@ steps:
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
+
+
+
